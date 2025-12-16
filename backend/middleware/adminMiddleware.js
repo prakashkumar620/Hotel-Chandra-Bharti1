@@ -5,8 +5,8 @@ function adminAuth(req, res, next) {
   if (!token) return res.status(401).json({ message: "Unauthorized" });
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (!decoded.admin) return res.status(403).json({ message: "Forbidden" });
-    req.admin = decoded.id;
+    if (!decoded.adminId) return res.status(403).json({ message: "Forbidden" });
+    req.admin = decoded.adminId;
     next();
   } catch (err) {
     res.status(401).json({ message: "Invalid Token" });
